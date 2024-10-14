@@ -25,9 +25,10 @@ const editarProductoraPorId = (productora,id) =>{
     const data = {
         nombre: productora.nombre,
         slogan: productora.slogan,
-        descripcion: productora.descripcion
+        descripcion: productora.descripcion,
+        estado: productora.estado
     }
-    return axiosConfig.put('/productoras'+ id, data,{
+    return axiosConfig.put(`/productoras/${id}`, data,{
         headers:headers
     })
 }

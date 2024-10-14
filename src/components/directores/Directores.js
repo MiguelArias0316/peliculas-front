@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { consultarDirectores, crearDirector } from '../../services/DirectorService'
-import ModalDirectores from './ModalDirectores'
+import { consultarDirectores, crearDirector, editarDirectorporId } from '../../services/DirectorService'
+import ModalCrearDirectores from './ModalCrearDirectores'
 import TablaDirectores from './TablaDirectores'
+import ModalEditarDirectores from './ModalEditarDirectores'
 
 export default function Directores() {
 
   const [directores, setDirectores] = useState([])
   const [director, setDirector] = useState({
     nombre: '',
-    descripcion: ''
   })
   useEffect(() => {
     listarDirectores()
@@ -16,7 +16,7 @@ export default function Directores() {
 
   const listarDirectores = async () => {
     try {
-      const { data } = await consultarDirectores()
+      const {data} = await consultarDirectores()
       setDirectores(data)
     } catch (e) {
       console.log(e)
@@ -24,7 +24,11 @@ export default function Directores() {
   }
   const guardarDirector = async () =>{
     try{
-      await crearDirector(director)
+      if(director._id){
+        await editarDirectorporId(director,director._id)
+      }else{
+        await crearDirector(director)
+      }
       listarDirectores()
       clearDirector()
     }catch(e){
@@ -42,22 +46,32 @@ export default function Directores() {
   const clearDirector = () =>{
     setDirector({
       ...director,
-      nombre: ''
+      nombre: '',
+      estado:''
     })
   }
+  const seleccionarDirectorParaEditar = (director) => {
+    setDirector(director);
+  };
 
   return (
     <div>
-      <ModalDirectores
+      <ModalCrearDirectores
       director={director}
       handleChange={handleChange}
       guardarDirector={guardarDirector}
       />
-      <h2>Directores</h2>
-      <button onClick={clearDirector} type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear director</button>
+      <ModalEditarDirectores
+      director={director}
+      handleChange={handleChange}
+      guardarDirector={guardarDirector}
+      />
+      <h3 class="text-center">Directores</h3>
       <TablaDirectores
         directores={directores}
+        seleccionarDirectorParaEditar={seleccionarDirectorParaEditar}
       />
+      <button onClick={clearDirector} type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear director</button>
     </div>
   )
 }

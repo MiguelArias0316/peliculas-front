@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { consultarProductoras, crearProductora } from '../../services/ProductoraService'
-import ModalProductoras from './ModalProductoras'
+import { consultarProductoras, crearProductora, editarProductoraPorId } from '../../services/ProductoraService'
+import ModalCrearProductoras from './ModalCrearProductoras'
 import TablaProductoras from './TablaProductoras'
+import ModalEditarProductoras from './ModalEditarProductoras'
 
 export default function Productoras() {
 
@@ -27,7 +28,11 @@ export default function Productoras() {
 
   const guardarProductora = async () => {
     try {
-      await crearProductora(productora)
+      if(productora._id){
+        await editarProductoraPorId(productora,productora._id)
+      }else{
+        await crearProductora(productora)
+      }
       listarProductoras()
       clearProductora()
     } catch (e) {
@@ -46,21 +51,31 @@ export default function Productoras() {
       ...productora,
       nombre: '',
       slogan: '',
-      descripcion: ''
+      descripcion: '',
+      estado:''
     })
+  }
+  const seleccionarProductoraParaEditar = (productora) =>{
+    setProductora(productora);
   }
   return (
     <div>
-      <ModalProductoras
+      <ModalCrearProductoras
         productora={productora}
         handleChange={handleChange}
         guardarProductora={guardarProductora}
       />
-      <h2>Productoras</h2>
-      <button onClick={clearProductora} type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear productora</button>
+      <ModalEditarProductoras
+      productora={productora}
+      handleChange={handleChange}
+      guardarProductora={guardarProductora}
+      />
+      <h3 class="text-center">Productoras</h3>
       <TablaProductoras
         productoras={productoras}
+        seleccionarProductoraParaEditar={seleccionarProductoraParaEditar}
       />
+      <button onClick={clearProductora} type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear productora</button>
     </div>
   )
 

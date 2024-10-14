@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TablaDirectores({directores}) {
+export default function TablaDirectores({directores, seleccionarDirectorParaEditar}) {
   return (
     <table className="table">
     <thead>
@@ -21,7 +21,7 @@ export default function TablaDirectores({directores}) {
               <td>{director.nombre}</td>
               <td>{director.estado ? 'Activo' : 'Inactivo'}</td>
               <td>{director.fecha_creacion}</td>
-              <td><button type="button" className="btn btn-dark">Editar</button></td>
+              <td><button type="button" className="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalEditarDirectores" onClick={() => seleccionarDirectorParaEditar(director)}>Editar</button></td>
             </tr>
           )
         })
@@ -30,3 +30,4 @@ export default function TablaDirectores({directores}) {
   </table>
   )
 }
+

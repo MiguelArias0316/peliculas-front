@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { consultarTiposMultimedia, crearTipoMultimedia } from '../../services/TipoMultimediaService'
-import ModalTiposMultimedia from './ModalTiposMultimedia'
+import ModalCrearTiposMultimedia from './ModalCrearTiposMultimedia'
 import TablaTiposMultimedia from './TablaTiposMultimedia'
 
 export default function TiposMultimedia() {
@@ -50,16 +50,16 @@ export default function TiposMultimedia() {
 
     return (
       <div>
-        <ModalTiposMultimedia
+        <ModalCrearTiposMultimedia
           tipoMultimedia={tipoMultimedia}
           handleChange={handleChange}
           guardarTipoMultimedia={guardarTipoMultimedia}
         />
-        <h2>Tipos Multimedia</h2>
-        <button onClick={clearTipoMultimedia} type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear tipo multimedia</button>
+        <h3 class="text-center">Tipos Multimedia</h3>
         <TablaTiposMultimedia
           tiposMultimedia={tiposMultimedia}
         />
+        <button onClick={clearTipoMultimedia} type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear tipo multimedia</button>
       </div>
     )
 

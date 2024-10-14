@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TablaProductoras({productoras}) {
+export default function TablaProductoras({productoras,seleccionarProductoraParaEditar}) {
     return (
         <table className="table">
             <thead>
@@ -25,7 +25,7 @@ export default function TablaProductoras({productoras}) {
                                 <td>{productora.descripcion}</td>
                                 <td>{productora.estado ? 'Activo' : 'Inactivo'}</td>
                                 <td>{productora.fecha_creacion}</td>
-                                <td><button type="button" className="btn btn-dark">Editar</button></td>
+                                <td><button type="button" className="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalEditarProductoras" onClick={() => seleccionarProductoraParaEditar(productora)}>Editar</button></td>
                             </tr>
                         )
                     })

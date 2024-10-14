@@ -22,9 +22,10 @@ const editarGeneroPorId = (genero, id) => {
 
         const data = {
             nombre: genero.nombre,
-            descripcion: genero.descripcion
+            descripcion: genero.descripcion,
+            estado: genero.estado
         }
-        return axiosConfig.put('/generos' + id, data,{
+        return axiosConfig.put(`/generos/${id}`, data, {
             headers : headers
         })
 }

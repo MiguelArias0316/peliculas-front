@@ -3,20 +3,19 @@ import { NavLink } from 'react-router-dom'
 
 export default function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
-            <div className="container-fluid">
-                <img src="" alt="Logo" width="30" height="24" className="d-inline-block align-text-top" />
-                Peliculas
+    <nav className="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
+            <div className="container">
+                <img src="/logo.png" alt="Logo" width="120" style={{"height": 'auto'}} className="d-inline-block align-text-top" />
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
-                    <div className="navbar-nav">
+                    <ul className="navbar-nav flex-grow-1 justify-content-between">
                     <NavLink
                             to='/'
                             className='nav-link'
                         >
-                            Home
+                            Inicio
                         </NavLink>
                         <NavLink
                             to='/generos'
@@ -43,12 +42,12 @@ export default function NavBar() {
                             Tipos Multimedia
                         </NavLink>
                         <NavLink
-                            to='/medias'
+                            to='/gestion-medias'
                             className='nav-link'
                         >
                             Media
                         </NavLink>
-                    </div>
+                    </ul>
                 </div>
             </div>
         </nav>

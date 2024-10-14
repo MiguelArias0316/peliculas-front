@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TablaGeneros({generos}) {
+export default function TablaGeneros({generos,seleccionarGeneroParaEditar}) {
   return (
     <table className="table">
     <thead>
@@ -23,7 +23,7 @@ export default function TablaGeneros({generos}) {
               <td>{genero.descripcion}</td>
               <td>{genero.estado ? 'Activo' : 'Inactivo'}</td>
               <td>{genero.fecha_creacion}</td>
-              <td><button type="button" className="btn btn-dark">Editar</button></td>
+              <td><button type="button" className="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalEditarGeneros" onClick={() => seleccionarGeneroParaEditar(genero)}>Editar</button></td>
             </tr>
           )
         })
